@@ -78,6 +78,7 @@ feedback_question_option_uuid=$( echo $options_uuid | awk -v var="$question_numb
 
 for token in ${auth_tokens[@]}
 do
+clientId=$( openssl rand -base64 20 | tr -dc 'a-zA-Z0-9' | head -c 15 )
 curl -s 'https://app.sli.do/eu1/api/v0.5/events/'$event_uuid'/polls/'$activePollUuid'/vote' \
   -H 'accept: application/json, text/plain, */*' \
   -H 'accept-language: en-GB,en;q=0.6' \
@@ -93,8 +94,9 @@ curl -s 'https://app.sli.do/eu1/api/v0.5/events/'$event_uuid'/polls/'$activePoll
   -H 'sec-fetch-site: same-origin' \
   -H 'sec-gpc: 1' \
   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36' \
-  -H 'x-client-id: QBdXUUplRrZSmGT' \
+  -H 'x-client-id: '$clientId'' \
   -H 'x-slidoapp-version: SlidoParticipantApp/53.200.4 (web)' \
   --data-raw '{"feedback_uuid":"'$activePollUuid'","votings":[{"feedback_question_uuid":"'$feedback_question_uuid'","feedback_question_option_uuid":"'$feedback_question_option_uuid'","is_anonymous":true}],"is_anonymous":true}' 1> /dev/null
 done
 
+echo -e "\e[1;34mFinished lmao\e[0m"
