@@ -6,8 +6,8 @@ void printHelp() {
     printf("options: \n");
     printf("u     slido poll url\n");
     printf("h     print this help.\n");
-    printf("v     vote question number\n");
-    printf("V     how many votes\n");
+    printf("q     vote question number\n");
+    printf("v     how many votes\n");
 }
 
 struct MemoryStruct {
